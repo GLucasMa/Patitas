@@ -1,0 +1,55 @@
+<div class="product-detail-page">
+    <div class="container">
+      <div class="spinner" *ngIf="isLoading"></div>
+      
+      <div class="product-not-found" *ngIf="!isLoading && !product">
+        <h2>Producto no encontrado</h2>
+        <p>El producto que estás buscando no existe o ha sido eliminado.</p>
+        <button class="btn btn-primary" (click)="goBack()">Volver a productos</button>
+      </div>
+      
+      <div class="product-detail" *ngIf="!isLoading && product">
+        <div class="product-image">
+          <img [src]="product.imageUrl" [alt]="product.name">
+        </div>
+        
+        <div class="product-info">
+          <div class="product-category">{{ product.category }}</div>
+          <h1 class="product-name">{{ product.name }}</h1>
+          <div class="product-price">${{ product.price.toFixed(2) }}</div>
+          
+          <div class="stock-info" [ngClass]="{'in-stock': product.stock > 0, 'out-of-stock': product.stock === 0}">
+            <span class="material-icons">{{ product.stock > 0 ? 'check_circle' : 'cancel' }}</span>
+            {{ product.stock > 0 ? 'En stock' : 'Sin stock' }}
+            <span *ngIf="product.stock > 0">({{ product.stock }} disponibles)</span>
+          </div>
+          
+          <div class="product-description">
+            <h3>Descripción</h3>
+            <p>{{ product.description }}</p>
+          </div>
+          
+          <div class="purchase-actions" *ngIf="isAuthenticated">
+            <div class="quantity-selector" *ngIf="product.stock > 0">
+              <button (click)="decrementQuantity()" [disabled]="quantity <= 1">-</button>
+              <input type="number" [(ngModel)]="quantity" min="1" [max]="product.stock">
+              <button (click)="incrementQuantity()" [disabled]="quantity >= product.stock">+</button>
+            </div>
+            
+            <button 
+              class="btn btn-primary add-to-cart" 
+              [disabled]="product.stock === 0"
+              (click)="addToCart()"
+            >
+              <span class="material-icons">shopping_cart</span>
+              Añadir al carrito
+            </button>
+          </div>
+          
+          <div class="auth-message" *ngIf="!isAuthenticated">
+            <p>Debe <a [routerLink]="['/auth/login']">iniciar sesión</a> para realizar compras.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

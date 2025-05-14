@@ -1,0 +1,26 @@
+<div class="product-card">
+    <div class="product-image">
+      <img [src]="product.imageUrl" [alt]="product.name">
+      <div class="stock-badge" [ngClass]="{'in-stock': product.stock > 0, 'out-of-stock': product.stock === 0}">
+        {{ product.stock > 0 ? 'En Stock' : 'Sin Stock' }}
+      </div>
+    </div>
+    
+    <div class="product-content">
+      <h3 class="product-title">{{ product.name }}</h3>
+      <p class="product-category">{{ product.category }}</p>
+      <p class="product-price">${{ product.price.toFixed(2) }}</p>
+      
+      <div class="product-actions">
+        <a [routerLink]="['/products', product.id]" class="btn btn-outline">Ver Detalle</a>
+        <button 
+          class="btn btn-primary" 
+          (click)="addToCart()"
+          [disabled]="product.stock === 0 || !isAuthenticated"
+          [title]="!isAuthenticated ? 'Debe iniciar sesión para comprar' : ''"
+        >
+          Añadir al Carrito
+        </button>
+      </div>
+    </div>
+  </div>

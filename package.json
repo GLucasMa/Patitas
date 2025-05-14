@@ -1,0 +1,21 @@
+{
+  "name": "pet-food-ecommerce",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "install:all": "npm run install:client && npm run install:backend",
+    "install:client": "cd client && npm install",
+    "install:backend": "cd backend && npm install",
+    "start:client": "cd client && npx ng serve --proxy-config proxy.conf.json",
+    "start:backend": "cd backend && npx nest start --watch",
+    "start": "concurrently \"npm run start:client\" \"npm run start:backend\"",
+    "build:client": "cd client && npm run build",
+    "build:backend": "cd backend && npm run build",
+    "build": "npm run build:client && npm run build:backend"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.0",
+    "@angular/cli": "^16.0.0",
+    "@nestjs/cli": "^10.0.0"
+  }
+}
