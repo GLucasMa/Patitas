@@ -5,6 +5,7 @@ import { UsersService } from '../users/users.service';
 import { User } from '../users/entities/user.entity';
 import { RegisterDto } from './dto/register.dto';
 import { LoginDto } from './dto/login.dto';
+import { CreateUserDto } from '@app/users/dto/create-user.dto';
 
 @Injectable()
 export class AuthService {
@@ -40,8 +41,8 @@ export class AuthService {
     };
   }
 
-  async register(registerDto: RegisterDto) {
-    const user = await this.usersService.create(registerDto);
+  async register(createUserDto: CreateUserDto) {
+    const user = await this.usersService.create(createUserDto);
     
     const payload = { sub: user.id, email: user.email, role: user.role };
     

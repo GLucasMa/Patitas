@@ -9,6 +9,7 @@ import { NotificationService } from './core/services/notification.service';
 
 @Component({
   selector: 'app-root',
+  templateUrl: './app.component.html',
   standalone: true,
   imports: [
     CommonModule,

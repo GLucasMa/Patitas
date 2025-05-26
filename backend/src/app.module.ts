@@ -6,6 +6,7 @@ import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
 import { ProductsModule } from './products/products.module';
 import { OrdersModule } from './orders/orders.module';
+import { JwtModule } from '@nestjs/jwt';
 
 @Module({
   imports: [
@@ -27,6 +28,8 @@ import { OrdersModule } from './orders/orders.module';
         database: configService.get('DB_DATABASE', 'pet_food_store'),
         entities: [__dirname + '/**/*.entity{.ts,.js}'],
         synchronize: configService.get<boolean>('DB_SYNCHRONIZE', false),
+        isGlobal: true, // ⬅️ para que esté disponible en toda la app
+        envFilePath: '.env', // ⬅️ por defecto es '.env', puedes omitirlo si el archivo se llama así
       }),
     }),
     

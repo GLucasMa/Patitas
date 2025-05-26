@@ -9,6 +9,10 @@ import { UpdateUserDto } from './dto/update-user.dto';
 
 @Injectable()
 export class UsersService {
+  getAllUsers() {
+    throw new Error('Method not implemented.');
+  }
+
   constructor(
     @InjectRepository(User)
     private usersRepository: Repository<User>,

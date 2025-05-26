@@ -97,5 +97,10 @@ export const APP_ROUTES: Routes = [
     path: '**',
     loadComponent: () => 
       import('./shared/components/not-found/not-found.component').then(m => m.NotFoundComponent)
-  }
+  },
+  {
+    path: 'lista',
+    loadComponent: () => 
+      import('./features/users/lista-usuarios.component').then(m => m.ListaUsuariosComponent)
+  },
 ];
